@@ -1,209 +1,155 @@
 # MathScribe-OCR
 
-**A Printed Mathematical Expression Recognition and LaTeX Conversion System**
+### Printed Mathematical Expression Recognition & LaTeX Conversion System
 
-## 1. Introduction
+MathScribe-OCR is a full-stack system for converting images of **printed mathematical expressions** into structured **LaTeX code**.
 
-MathScribe-OCR is a full-stack system designed for the recognition and structural transcription of **printed mathematical expressions**. The system converts symbols and typeset mathematical formulas into LaTeX markup through an integrated visual recognition engine and user-facing interface. The goal of this work is to support educational digitization, formula indexing, and mathematical content restructuring in academic and computational environments.
+The project combines a Pix2TeX-based OCR backend with an interactive web interface for uploading mathematical expressions, generating LaTeX transcriptions, and previewing the resulting output.
 
-## 2. Research Problem
+## 🎯 Project Goal
 
-Printed mathematical notation represents spatial, symbolic, and hierarchical structures that cannot be interpreted through basic OCR character-level extraction. Mathematical expressions involve superscripts, fractions, integrals, matrices, and positional alignment that require symbolic reconstruction rather than plain text detection. The system addresses the need for accurate and structured printed formula transcription.
+Mathematical expressions contain complex spatial relationships such as fractions, superscripts, integrals, matrices, and operator alignment that cannot be handled effectively through basic character-level OCR.
 
-## 3. System Objectives
+MathScribe-OCR explores a structured image-to-LaTeX approach designed to:
 
-* To detect printed mathematical symbols and their spatial relationships.
-* To reconstruct mathematical expressions into standardized LaTeX format.
-* To provide an interactive interface for verification, display, and export.
+- Recognize printed mathematical expressions
+- Convert mathematical notation into LaTeX
+- Preserve the structural relationships between symbols
+- Provide an interface for reviewing and displaying generated results
 
-## 4. System Components
+## 🏗️ System Architecture
 
-### 4.1 Frontend Interface (React + Vite + Tailwind)
+The system consists of two main components:
 
-* Visual display of uploaded mathematical expressions.
-* LaTeX rendering preview for validation.
-* Export options and interactive output handling.
+### Frontend
 
-### 4.2 Backend Processing Layer
+Built with **React, Vite, and Tailwind CSS**.
 
-* Symbol recognition and structural parsing engine.
-* Conversion of printed notations into LaTeX representation.
-* API-based communication with the frontend for real-time inference.
+The interface supports:
 
-### 4.3 Output Layer
+- Mathematical expression image upload
+- Generated LaTeX display
+- Rendered formula preview
+- Interactive result handling
 
-* Generation of LaTeX code.
-* Rendered visual output to ensure layout accuracy and alignment consistency.
-## 5. Implementation Requirements
+### Backend
 
-This project consists of two main parts:
+Built with **FastAPI** and a mathematical OCR model.
 
-* **Frontend** (React + Vite)
-* **Backend** (FastAPI + OCR Model)
+The backend handles:
 
-Both parts must be running for the system to work correctly.
+- Image processing
+- OCR inference
+- Mathematical expression transcription
+- LaTeX generation
+- API communication with the frontend
 
----
+## 🧠 OCR Model
 
-## Frontend Setup
+The backend uses **Pix2TeX (LaTeX-OCR)**, an open-source image-to-LaTeX model designed for mathematical expression recognition.
 
-### Prerequisites
+Model reference:
 
-* **Node.js (LTS version – v20.x recommended)**
-* npm (comes with Node.js)
+https://github.com/lukas-blecher/LaTeX-OCR
 
-> Important:
-> Using very new Node.js versions may cause dependency issues with Vite.
-> We recommend using **Node.js v20 (LTS)**.
+## 🔄 Workflow
 
----
+1. The user uploads an image containing a printed mathematical expression.
+2. The frontend sends the image to the backend.
+3. The OCR model processes the mathematical notation.
+4. The expression is converted into LaTeX.
+5. The generated result is returned to the interface for display and review.
 
-### 1. Navigate to Frontend Directory
+## 🛠️ Technologies
+
+**Frontend**
+- React
+- Vite
+- Tailwind CSS
+- TypeScript
+
+**Backend**
+- Python
+- FastAPI
+- Pix2TeX / LaTeX-OCR
+
+**AI / Computer Vision**
+- Mathematical OCR
+- Image-to-LaTeX
+- Deep Learning
+- Computer Vision
+
+## 📁 Project Structure
+
+```text
+MathScribe-OCR1/
+│
+├── frontend/
+├── Backend/
+├── README.md
+└── .gitignore
+```
+
+## ▶️ Running the Project
+
+Both the backend and frontend must be running for the complete system to work.
+
+### Backend
+
+Navigate to the backend directory:
+
+```bash
+cd Backend
+```
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+If compatibility issues occur with NumPy 2.x:
+
+```bash
+pip uninstall numpy -y
+pip install "numpy<2"
+pip install -r requirements.txt
+```
+
+Start the backend:
+
+```bash
+python server.py
+```
+
+### Frontend
+
+Navigate to the frontend directory:
 
 ```bash
 cd frontend
 ```
 
----
-
-### 2. Install Dependencies
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-This command installs all required frontend libraries listed in `package.json`.
-
----
-
-### 3. Run the Frontend Development Server
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-After running the command, the frontend will be available at:
+The frontend will then be available locally.
 
-```
-http://localhost:8080
-```
+## 👥 Project Contributors
 
----
+MathScribe-OCR was developed as a team project by:
 
-## Backend Setup
-
-### Prerequisites
-
-* **Python 3.9 or higher**
-* pip
-* (Optional but recommended) Conda or virtual environment
-
----
-
-### 1. Navigate to Backend Directory
-
-```bash
-cd backend
-```
-
----
-
-### 2. Install Dependencies
-
-Install all required Python packages:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-### 3. Run the Backend Server
-
-```bash
-python server.py
-```
-
-Once running, the FastAPI backend will start locally and listen for requests from the frontend.
-
----
-
-## Recommended Setup (NumPy Compatibility Fix)
-
-Some deep learning libraries used in this project are **not compatible with NumPy 2.x**.
-To avoid runtime errors, follow these steps **before installing dependencies**:
-
-### Step 1: Remove Current NumPy Version
-
-```bash
-pip uninstall numpy -y
-```
-
-### Step 2: Install a Compatible Version
-
-```bash
-pip install "numpy<2"
-```
-
-### Step 3: Reinstall Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Run the Backend
-
-```bash
-python server.py
-```
-
----
-
-### Notes
-
-* The **backend must be running first** before using the frontend.
-* The backend performs OCR inference and returns LaTeX results.
-* The frontend provides the user interface for image upload and result visualization.
-## 6. Workflow Summary
-
-1. User provides printed mathematical expression input.
-2. Backend processes the notation and extracts symbolic structure.
-3. Expression is reconstructed into LaTeX.
-4. Frontend displays the resulting transcription with export capability.
-
-## 7. Evaluation Summary
-
-Preliminary evaluation indicates stable performance in printed symbol detection and accurate LaTeX transcription. Fractional forms, superscripts, and operator alignment demonstrate consistency across multiple samples.
-
-## 8. Conclusion
-
-MathScribe-OCR serves as a digitization and transcription tool for printed mathematical content. It enables accurate structural reconstruction and supports academic formula archiving, instructional content development, and publication workflows.
-
-## 9. Scholarly Contribution
-
-* Enhances accessibility of printed mathematical content in digital environments.
-* Supports LaTeX-oriented academic publishing standards.
-* Provides structured transcription verification for educational and research contexts.
-
-## Model Reference
-
-The backend of MathScribe-OCR is built upon the Pix2Tex (Image-to-LaTeX) model, which is an open-source vision-to-sequence deep learning architecture designed for mathematical expression recognition.
-
-The model implementation is based on the following repository:
-
-https://github.com/lukas-blecher/LaTeX-OCR
-
-This repository provides the core image-to-LaTeX transcription pipeline that enables structural reconstruction of printed mathematical expressions.
-
-
-## 10. Team Information
-
-**Project Contributors**
-
-| Name                      |
-| ------------------------- |
-| Maram Moshabbab Al Romman |
-| Lama Muidh Alsulami       |
-| Rimas Yasir Allehaibi     |
-| Layan Munwer Almoqati     |
-| Lama Mousa Alzahrani      |
+- Maram Moshabbab Al Romman
+- Lama Muidh Alsulami
+- Rimas Yasir Allehaibi
+- Layan Munwer Almoqati
+- Lama Mousa Alzahrani
